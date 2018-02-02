@@ -24,13 +24,16 @@ export default class Article extends Component {
 			</div>
 		)
 	}
+
 	getBody() {
 		if(!this.state.isOpen) return null
 		const {article} = this.props
 		return <section>{article.text}</section>
 	}
 
-	toggleOpen = () => {
+	toggleOpen = (ev) => {
+		//ev.preventDefault()
+		console.log('---', ev.nativeEvent)
 		this.setState({
 			isOpen: !this.state.isOpen
 		})
