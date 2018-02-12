@@ -1,14 +1,28 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import ArticleCommentsState from './ArticleCommentsState'
 //import ArticleComments from './ArticleComments'
 
 export default class Article extends Component {
+	static propTypes = {
+		//article: PropTypes.number
+		article: PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			title: PropTypes.string.isRequired,
+			text: PropTypes.string,
+			comments: PropTypes.arrayOf(PropTypes.shape({
+				id: PropTypes.string.isRequired,
+				user: PropTypes.string.isRequired,
+				text: PropTypes.string.isRequired}))
+		}).isRequired
+	}
+
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			isOpen: true,
-			isComntsShown: false
+			isOpen: true/*,
+			isComntsShown: false*/
 		}
 		//this.toggleOpen = this.toggleOpen.bind(this)
 	}

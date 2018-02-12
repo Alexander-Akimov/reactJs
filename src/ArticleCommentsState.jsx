@@ -1,41 +1,46 @@
 import React, {Component}  from 'react'
+import Comment from './Comment'
+// ArticleCommentsState.defaultProps = {
+// 		comments: []
+// 	}
 
 export default class ArticleCommentsState extends Component {
+	static defaultProps = {
+		comments: []
+	}
+
+	state = { //ES7 syntax
+		areComntsShown: false
+	}
+
 	constructor(props) {
 		super(props)
-
-		this.state = {
-			isComntsShown: false
-		}
-		//this.toggleOpen = this.toggleOpen.bind(this)
 	}
 
 	render() {
 		const {comments} = this.props
-		const {isComntsShown} = this.state
+		const {areComntsShown} = this.state
 
-		if(typeof comments === "undefined") return null
+		// if(typeof comments === "undefined") return null
+		if(!comments.length) return null
 		//console.log(this.props)		
 		const articleComments = comments.map((comment) => 
-			<li key = {comment.id}>
-				<section>{comment.user}</section>
-				<section>{comment.text}</section>
-			</li>)
+			<li key = {comment.id}><Comment comment = {comment}/></li>)
 		
-		 	return (
-		 		<div>
-		 			<button onClick = {this.showComments}>
-		 				{isComntsShown ? 'Hide comments' : 'Show comments'}
-		 			</button>
-		 			{isComntsShown ? <ul>{articleComments}</ul> : null}
-				</div>		
-				)
+		return (
+			<div>
+				<button onClick = {this.showComments}>
+					{areComntsShown ? 'Hide comments' : 'Show comments'}
+				</button>
+				{areComntsShown ? <ul>{articleComments}</ul> : null}
+			</div>		
+		)
 	}
 
 	showComments = () => {
 		console.log('showComments called')
 		this.setState({
-			isComntsShown: !this.state.isComntsShown
+			areComntsShown: !this.state.areComntsShown
 		})
 	}
 }
