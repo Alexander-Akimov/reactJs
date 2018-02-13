@@ -18,8 +18,6 @@ class Article extends Component {
 		}).isRequired
 	}
 
-
-
 	render() {
 		const {article, isOpen, toggleOpen} = this.props
 		return (

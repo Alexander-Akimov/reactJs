@@ -1,25 +1,21 @@
 import React, {Component}  from 'react'
 import Comment from './Comment'
+import toggleOpen from '../decorators/toggleOpen'
 // ArticleCommentsState.defaultProps = {
 // 		comments: []
 // 	}
 
-export default class ArticleCommentsState extends Component {
+class ArticleCommentsState extends Component {
 	static defaultProps = {
 		comments: []
 	}
 
-	state = { //ES7 syntax
+/*	state = { //ES7 syntax
 		areComntsShown: false
-	}
-
-	constructor(props) {
-		super(props)
-	}
+	}*/
 
 	render() {
-		const {comments} = this.props
-		const {areComntsShown} = this.state
+		const {comments, isOpen, toggleOpen} = this.props
 
 		// if(typeof comments === "undefined") return null
 		if(!comments.length) return null
@@ -29,18 +25,12 @@ export default class ArticleCommentsState extends Component {
 		
 		return (
 			<div>
-				<button onClick = {this.showComments}>
-					{areComntsShown ? 'Hide comments' : 'Show comments'}
+				<button onClick = {toggleOpen}>
+					{isOpen ? 'Hide comments' : 'Show comments'}
 				</button>
-				{areComntsShown ? <ul>{articleComments}</ul> : null}
+				{isOpen ? <ul>{articleComments}</ul> : null}
 			</div>		
 		)
 	}
-
-	showComments = () => {
-		console.log('showComments called')
-		this.setState({
-			areComntsShown: !this.state.areComntsShown
-		})
-	}
 }
+export default toggleOpen(ArticleCommentsState)
