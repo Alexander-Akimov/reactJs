@@ -25,9 +25,7 @@ class ArticleCommentsState extends Component {
 		
 		return (
 			<div>
-				<button onClick = {toggleOpen}>
-					{isOpen ? 'Hide comments' : 'Show comments'}
-				</button>
+				<button onClick = {toggleOpen}>{isOpen ? 'Hide comments' : 'Show comments'}</button>
 				{isOpen ? <ul>{articleComments}</ul> : null}
 			</div>		
 		)
